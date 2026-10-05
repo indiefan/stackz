@@ -242,8 +242,8 @@ struct GeneralSettingsTab: View {
                     .cornerRadius(8)
                     .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.white.opacity(0.1), lineWidth: 1))
                 }
-                
 
+                UpdateSettingsSection()
             }
             .padding(24)
             .padding(.bottom, 20)

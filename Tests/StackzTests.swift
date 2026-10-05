@@ -404,6 +404,12 @@ class StackzTests: XCTestCase {
         XCTAssertNil(ActiveStackManager.determineActiveStack(for: customFrame, screenVisibleFrame: screenVisibleFrame, stacks: stacks, gridConfig: config))
     }
     
+    func testUpdaterIsOffWithoutAFeed() {
+        // The test bundle has no SUFeedURL, like a local build: no updater, and so no network requests
+        XCTAssertNil(UpdateController.shared.updater)
+        XCTAssertFalse(UpdateController.shared.canCheckForUpdates)
+    }
+
     func testStackRouterSplitsAndMerges() {
         // Construct the mock tree from the drawing diagram
         let M = UserStack(id: UUID(), name: "M", startCol: 0, startRow: 0, endCol: 0, endRow: 0, parentId: nil, isMain: true)

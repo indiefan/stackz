@@ -10,7 +10,9 @@ struct StackzApp: App {
                 appState.openSettings()
             }
             .keyboardShortcut(",", modifiers: .command)
-            
+
+            UpdateMenuItem()
+
             Divider()
             
             Button("Quit") {
@@ -32,7 +34,8 @@ class AppState: ObservableObject {
         _ = HotkeyStore.shared
         _ = ActiveStackManager.shared
         _ = ActiveStackOverlayManager.shared
-        
+        _ = UpdateController.shared
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.openSettings()
         }

@@ -2,6 +2,7 @@
 .swiftpm/
 .DS_Store
 Stackz.app/
+dist/
 *.xcodeproj/
 *.xcworkspace/
 xcuserdata/

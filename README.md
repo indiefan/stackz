@@ -35,7 +35,7 @@ Zones nest, and that is what keeps the screen tidy without any effort from you:
   <img src="docs/auto-routing.svg" alt="Sending Shell to the left column moves Browser over. Sending Chat to the right column shrinks Browser to the center. Sending Browser back to the wider zone merges Chat in behind it." width="880" />
 </p>
 
-Stackz is a menu bar app in about 3,500 lines of Swift. It has no dependencies and no network code.
+Stackz is a menu bar app in about 3,600 lines of Swift. Its one dependency is [Sparkle](https://sparkle-project.org), for updates, and the update check is the only network request it ever makes.
 
 ## Install
 
@@ -43,11 +43,11 @@ Stackz is a menu bar app in about 3,500 lines of Swift. It has no dependencies a
 curl -fsSL https://raw.githubusercontent.com/indiefan/stackz/main/install.sh | bash
 ```
 
-That downloads the source, compiles it on your Mac, copies `Stackz.app` to `/Applications` (or `~/Applications` if you can't write there) and opens it. It needs macOS 13 or later and Apple's Command Line Tools (`xcode-select --install`). It never asks for sudo, and the build usually takes well under a minute. Run the same command again to update.
+That puts `Stackz.app` in `/Applications` (or `~/Applications` if you can't write there) and opens it. It needs macOS 13 or later and never asks for sudo.
 
-There is no prebuilt download yet. Compiling locally has one upside: macOS doesn't quarantine an app built on your own machine, so there are no Gatekeeper warnings to click through.
+The installer uses the latest signed and notarized release when there is one, and refuses any download that isn't signed with the Stackz developer certificate. When no release is available it builds from source instead, which needs Apple's Command Line Tools (`xcode-select --install`) and takes about a minute. Each release is also attached to the [releases page](https://github.com/indiefan/stackz/releases) as `Stackz.zip`, if you would rather download it yourself.
 
-If you would rather read a script before running it, clone the repository and run the same installer from the checkout:
+To read the script before running it, or to build from source by choice, clone the repository and run the same installer from the checkout:
 
 ```bash
 git clone https://github.com/indiefan/stackz.git
@@ -62,6 +62,12 @@ cd stackz
 3. The Settings window opens, and a grid icon appears in the menu bar. There is no Dock icon.
 
 Then focus any window and press <kbd>⇧</kbd><kbd>⌘</kbd><kbd>J</kbd>.
+
+### Updates
+
+Release builds update themselves. On its second launch Stackz asks whether it may check for updates automatically. If you agree, it looks once a day and tells you when a new version is ready; the menu bar menu shows Update Available… until you have dealt with it. You can change your answer in Settings → General, and check by hand at any time with Check for Updates… in the same menu. Every update is verified against the developer's signing key before it is installed.
+
+A copy built from source has no updater. Run the installer again, or pull and rebuild.
 
 ## The starter layout
 
@@ -149,7 +155,7 @@ Stackz outlines the stack that holds the focused window, so you can always see w
 
 Click the grid icon in the menu bar and choose Settings. The window also opens whenever Stackz starts.
 
-- **General** holds the grid size (2 to 24 columns and rows), the shortcuts that aren't tied to a zone, the border switches and the auto-sort switches.
+- **General** holds the grid size (2 to 24 columns and rows), the shortcuts that aren't tied to a zone, the border switches, the auto-sort switches and, in release builds, the automatic update check.
 - **Stacks** shows your stacks as a tree. Double-click one to redraw it on the grid or change its four shortcuts. **Split** divides a stack in two, **New Stack** starts a new tree, and **Reset All** deletes every stack and clears every shortcut.
 
 To record a shortcut, click its field and press the keys. <kbd>Esc</kbd> cancels and <kbd>Delete</kbd> clears it. A shortcut needs <kbd>⌘</kbd>, <kbd>⌃</kbd> or <kbd>⌥</kbd>; Shift alone isn't accepted, because it would swallow ordinary typing.
@@ -185,7 +191,7 @@ Stackz rewrites the file whenever you change a setting, so quit Stackz before ed
 | Accessibility | Reading and setting window positions, and focusing windows | Yes |
 | Screen Recording | Window thumbnails in the Spin switcher | No |
 
-- Stackz contains no network code. It never connects to anything, and there is no telemetry, analytics or update check.
+- The update check is the only network request Stackz makes. Release builds fetch a small feed file from github.com, once a day and only if you allow it. The request names the Stackz version and says nothing about you or your Mac. There is no telemetry and no analytics, and a copy built from source makes no network requests at all.
 - Window thumbnails are held in memory for the switcher and never written to disk.
 - A debug log is written to `$TMPDIR/stackz.log` and cleared at each launch. It records the actions Stackz took and the names of the apps whose windows it handled. It never records window titles or contents.
 - Your shortcuts are registered with the system hotkey API, which only delivers the combinations you have bound. Stackz also installs a key monitor so it can record new shortcuts in Settings. That monitor ignores every key press unless a shortcut field is waiting for input.
@@ -197,8 +203,7 @@ Stackz rewrites the file whenever you change a setting, so quit Stackz before ed
 - A window is only in a stack if it can take that exact size. Apps that enforce their own sizes, such as fixed-size windows or terminals that resize in whole character cells, can land a few points off, and Stackz then treats them as loose windows.
 - Stackz works within the current Space and leaves minimized, hidden and native full-screen windows alone.
 - There is no launch-at-login switch yet. Add Stackz under System Settings → General → Login Items if you want it at startup.
-- There is no prebuilt, notarized download yet, so installing means compiling. The installer does that for you.
-- A copy built without a signing certificate is ad-hoc signed, and macOS treats every such build as a new app. After updating one, you may have to remove Stackz from the Accessibility list and allow it again.
+- A copy built from source without a signing certificate is ad-hoc signed, and macOS treats every such build as a new app. After rebuilding one, you may have to remove Stackz from the Accessibility list and allow it again. Signed releases don't have this problem.
 
 ## Building from source
 
@@ -210,9 +215,9 @@ cd stackz
 open Stackz.app
 ```
 
-`build.sh` compiles with `swiftc`, assembles the app bundle, and signs it with an Apple Development certificate if your keychain has one, falling back to an ad-hoc signature. A real certificate keeps macOS from asking for Accessibility again after every rebuild.
+`build.sh` compiles with SwiftPM, which fetches Sparkle on the first run. It then assembles the app bundle and signs it with an Apple Development certificate if your keychain has one, falling back to an ad-hoc signature. A real certificate keeps macOS from asking for Accessibility again after every rebuild. These builds have the updater switched off, so a copy you are working on never replaces itself with a release.
 
-`Package.swift` is there for `swift build` and `swift test`. SwiftPM alone doesn't produce the `.app` bundle or include the starter config, so use `build.sh` for anything you intend to run.
+`swift build` and `swift test` work too. SwiftPM alone doesn't produce the `.app` bundle or include the starter config, so use `build.sh` for anything you intend to run. Signed releases are covered in [RELEASING.md](RELEASING.md).
 
 ```bash
 swift test
@@ -243,6 +248,7 @@ tail -f "$TMPDIR/stackz.log"
 | `ZOrderLookup.swift` | Window list queries: z-order, windows in a rectangle, thumbnails |
 | `AccessibilityElement.swift`, `AXExtension.swift`, `AXPrivate.swift` | Wrappers around the Accessibility API |
 | `SettingsView.swift` | The Settings window, grid editor and shortcut recorder |
+| `UpdateController.swift` | The Sparkle updater, its menu item and its Settings switch |
 | `Logger.swift` | The debug log |
 
 ## Uninstall
@@ -251,6 +257,7 @@ tail -f "$TMPDIR/stackz.log"
 pkill -x Stackz
 rm -rf /Applications/Stackz.app
 rm ~/.stackz.json
+defaults delete io.github.indiefan.stackz 2>/dev/null
 ```
 
 Then remove Stackz from System Settings → Privacy & Security → Accessibility, and from Screen Recording if you allowed it.
@@ -261,7 +268,7 @@ Issues and pull requests are welcome. For anything larger than a bug fix, please
 
 ## Acknowledgments
 
-The Accessibility wrappers in `Sources/AXExtension.swift` and `Sources/AccessibilityElement.swift` come from [Rectangle](https://github.com/rxhanson/Rectangle) by Ryan Hanson, used under the MIT license. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+The Accessibility wrappers in `Sources/AXExtension.swift` and `Sources/AccessibilityElement.swift` come from [Rectangle](https://github.com/rxhanson/Rectangle) by Ryan Hanson, used under the MIT license. Updates are delivered by [Sparkle](https://sparkle-project.org). See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for both licenses.
 
 ## License
 
