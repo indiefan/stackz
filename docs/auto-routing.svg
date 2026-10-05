@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 318" width="960" height="318" role="img" aria-labelledby="title desc">
+  <title id="title">Stackz auto-routing</title>
+  <desc id="desc">Four steps. One: Browser fills the screen. Two: sending Shell to the left column moves Browser over to the remaining columns. Three: sending Chat to the right column shrinks Browser to the center. Four: sending Browser to the wider center-plus-right zone merges Chat in behind it, forming a stack of two windows.</desc>
+  <style>
+    .t { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
+    .m { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  </style>
+  <rect x="0.5" y="0.5" width="959" height="317" rx="18" fill="#12141a" stroke="#262a35"/>
+  <text class="t" x="36" y="50" font-size="22" font-weight="700" fill="#f3f4f6" text-anchor="start">Layouts that arrange themselves</text>
+  <text class="t" x="36" y="76" font-size="14" font-weight="400" fill="#9aa3b2" text-anchor="start">Send a window deeper and the one behind it makes room. Send it wider and they merge into one stack.</text>
+  <text class="t" x="35" y="114" font-size="13.5" font-weight="600" fill="#f3f4f6" text-anchor="start">Start</text>
+  <rect x="35" y="127" width="206" height="122" rx="9" fill="#1a1d26" stroke="#2c313d"/>
+  <rect x="43" y="135" width="190" height="106" rx="6" fill="#38bdf8"/>
+  <text class="t" x="138.0" y="192.5" font-size="12.5" font-weight="700" fill="#0b1220" text-anchor="middle">Browser</text>
+  <text class="t" x="35" y="274" font-size="13" font-weight="400" fill="#9aa3b2" text-anchor="start">Browser fills the screen.</text>
+  <path d="M245 188.0 H259 M254 183.0 L259 188.0 L254 193.0" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="263" y="98" width="45" height="22" rx="6" fill="#232733" stroke="#3b4252"/>
+  <text class="t" x="285.5" y="114" font-size="13" font-weight="600" fill="#ffffff" text-anchor="middle">⇧⌘H</text>
+  <text class="t" x="316" y="114" font-size="13.5" font-weight="600" fill="#f3f4f6" text-anchor="start">send Shell</text>
+  <rect x="263" y="127" width="206" height="122" rx="9" fill="#1a1d26" stroke="#2c313d"/>
+  <rect x="271" y="135" width="50" height="106" rx="6" fill="#a5b4fc"/>
+  <text class="t" x="296.0" y="192.5" font-size="12.5" font-weight="700" fill="#0b1220" text-anchor="middle">Shell</text>
+  <rect x="327" y="135" width="134" height="106" rx="6" fill="#38bdf8"/>
+  <text class="t" x="394.0" y="192.5" font-size="12.5" font-weight="700" fill="#0b1220" text-anchor="middle">Browser</text>
+  <text class="t" x="263" y="274" font-size="13" font-weight="400" fill="#9aa3b2" text-anchor="start">Browser moves over</text>
+  <text class="t" x="263" y="293" font-size="13" font-weight="400" fill="#9aa3b2" text-anchor="start">to make room.</text>
+  <path d="M473 188.0 H487 M482 183.0 L487 188.0 L482 193.0" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="491" y="98" width="45" height="22" rx="6" fill="#232733" stroke="#3b4252"/>
+  <text class="t" x="513.5" y="114" font-size="13" font-weight="600" fill="#ffffff" text-anchor="middle">⇧⌘K</text>
+  <text class="t" x="544" y="114" font-size="13.5" font-weight="600" fill="#f3f4f6" text-anchor="start">send Chat</text>
+  <rect x="491" y="127" width="206" height="122" rx="9" fill="#1a1d26" stroke="#2c313d"/>
+  <rect x="499" y="135" width="50" height="106" rx="6" fill="#a5b4fc"/>
+  <text class="t" x="524.0" y="192.5" font-size="12.5" font-weight="700" fill="#0b1220" text-anchor="middle">Shell</text>
+  <rect x="555" y="135" width="78" height="106" rx="6" fill="#38bdf8"/>
+  <text class="t" x="594.0" y="192.5" font-size="12.5" font-weight="700" fill="#0b1220" text-anchor="middle">Browser</text>
+  <rect x="639" y="135" width="50" height="106" rx="6" fill="#f9a8d4"/>
+  <text class="t" x="664.0" y="192.5" font-size="12.5" font-weight="700" fill="#0b1220" text-anchor="middle">Chat</text>
+  <text class="t" x="491" y="274" font-size="13" font-weight="400" fill="#9aa3b2" text-anchor="start">Browser gives up</text>
+  <text class="t" x="491" y="293" font-size="13" font-weight="400" fill="#9aa3b2" text-anchor="start">the right columns too.</text>
+  <path d="M701 188.0 H715 M710 183.0 L715 188.0 L710 193.0" fill="none" stroke="#6b7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="719" y="98" width="45" height="22" rx="6" fill="#232733" stroke="#3b4252"/>
+  <text class="t" x="741.5" y="114" font-size="13" font-weight="600" fill="#ffffff" text-anchor="middle">⇧⌘;</text>
+  <text class="t" x="772" y="114" font-size="13.5" font-weight="600" fill="#f3f4f6" text-anchor="start">send Browser</text>
+  <rect x="719" y="127" width="206" height="122" rx="9" fill="#1a1d26" stroke="#2c313d"/>
+  <rect x="727" y="135" width="50" height="106" rx="6" fill="#a5b4fc"/>
+  <text class="t" x="752.0" y="192.5" font-size="12.5" font-weight="700" fill="#0b1220" text-anchor="middle">Shell</text>
+  <rect x="783" y="135" width="134" height="106" rx="6" fill="#f9a8d4"/>
+  <rect x="783" y="142" width="127" height="99" rx="6" fill="#38bdf8"/>
+  <text class="t" x="846.5" y="196.0" font-size="12.5" font-weight="700" fill="#0b1220" text-anchor="middle">Browser</text>
+  <text class="t" x="719" y="274" font-size="13" font-weight="400" fill="#9aa3b2" text-anchor="start">Chat merges in behind it.</text>
+  <text class="t" x="719" y="293" font-size="13" font-weight="400" fill="#9aa3b2" text-anchor="start">⌃⇧; spins between them.</text>
+</svg>

@@ -1,0 +1,8 @@
+.build/
+.swiftpm/
+.DS_Store
+Stackz.app/
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+.cursorrules
