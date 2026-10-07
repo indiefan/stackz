@@ -31,9 +31,11 @@ esac
 
 if [ "$RELEASE" = 1 ]; then
     # Find the signing certificate before spending time on the build
+    # Identities are passed to codesign by SHA-1 hash: a name can match several
+    # certificates (an expired one and its renewal, for instance) and codesign then refuses
     IDENTITY="$CODESIGN_IDENTITY"
     if [ -z "$IDENTITY" ]; then
-        IDENTITY=$(security find-identity -p codesigning -v | grep "Developer ID Application" | head -n 1 | awk -F '"' '{print $2}')
+        IDENTITY=$(security find-identity -p codesigning -v | grep "Developer ID Application" | head -n 1 | awk '{print $2}')
     fi
     if [ -z "$IDENTITY" ]; then
         echo "No Developer ID Application certificate found in the keychain. See RELEASING.md."
@@ -119,7 +121,7 @@ done
 if [ "$RELEASE" = 1 ]; then
     # Distribution: a Developer ID signature with the hardened runtime and a secure
     # timestamp, which is what notarization requires
-    echo "Codesigning app for release with: $IDENTITY"
+    echo "Codesigning app for release with: $(security find-identity -p codesigning -v | grep "$IDENTITY" | awk -F '"' '{print $2}' || echo "$IDENTITY")"
     SIGN=(codesign --force --sign "$IDENTITY" --options runtime)
     if [ "$IDENTITY" != "-" ]; then
         # An ad-hoc identity (-) only rehearses the pipeline and cannot be timestamped
@@ -138,11 +140,12 @@ if [ "$RELEASE" = 1 ]; then
 else
     # Local use: codesign with an Apple Development certificate to persist Accessibility permissions
     echo "Codesigning app for local use..."
-    DEV_IDENTITY=$(security find-identity -p codesigning -v | grep "Apple Development" | head -n 1 | awk -F '"' '{print $2}')
+    DEV_IDENTITY=$(security find-identity -p codesigning -v | grep "Apple Development" | head -n 1)
 
     if [ -n "$DEV_IDENTITY" ]; then
-        echo "Found Apple Development certificate: $DEV_IDENTITY"
-        codesign --force --deep --sign "$DEV_IDENTITY" "$APP_DIR"
+        echo "Found Apple Development certificate: $(echo "$DEV_IDENTITY" | awk -F '"' '{print $2}')"
+        # Signed by SHA-1 hash, since the name alone is ambiguous when a renewed certificate sits next to an old one
+        codesign --force --deep --sign "$(echo "$DEV_IDENTITY" | awk '{print $2}')" "$APP_DIR"
     else
         echo "No Apple Development certificate found, falling back to ad-hoc signature."
         codesign --force --deep --sign - "$APP_DIR"
