@@ -243,6 +243,8 @@ struct GeneralSettingsTab: View {
                     .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.white.opacity(0.1), lineWidth: 1))
                 }
 
+                LaunchAtLoginSection()
+                
                 UpdateSettingsSection()
             }
             .padding(24)

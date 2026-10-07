@@ -167,7 +167,7 @@ Stackz outlines the stack that holds the focused window, so you can always see w
 
 Click the grid icon in the menu bar and choose Settings. The window also opens whenever Stackz starts.
 
-- **General** holds the grid size (2 to 24 columns and rows), the shortcuts that aren't tied to a zone, the border switches, the auto-sort switches and, in release builds, the automatic update check.
+- **General** holds the grid size (2 to 24 columns and rows), the shortcuts that aren't tied to a zone, the border switches, the auto-sort switches, launch at login and, in release builds, the automatic update check.
 - **Stacks** shows your stacks as a tree. Double-click one to redraw it on the grid or change its four shortcuts. **Split** divides a stack in two, **New Stack** starts a new tree, and **Reset All** deletes every stack and clears every shortcut.
 
 To record a shortcut, click its field and press the keys. <kbd>Esc</kbd> cancels and <kbd>Delete</kbd> clears it. A shortcut needs <kbd>⌘</kbd>, <kbd>⌃</kbd> or <kbd>⌥</kbd>; Shift alone isn't accepted, because it would swallow ordinary typing.
@@ -214,7 +214,6 @@ Stackz rewrites the file whenever you change a setting, so quit Stackz before ed
 - One layout is shared by all displays. Per-display layouts aren't supported yet.
 - A window is only in a stack if it can take that exact size. Apps that enforce their own sizes, such as fixed-size windows or terminals that resize in whole character cells, can land a few points off, and Stackz then treats them as loose windows.
 - Stackz works within the current Space and leaves minimized, hidden and native full-screen windows alone.
-- There is no launch-at-login switch yet. Add Stackz under System Settings → General → Login Items if you want it at startup.
 - A copy built from source without a signing certificate is ad-hoc signed, and macOS treats every such build as a new app. After rebuilding one, you may have to remove Stackz from the Accessibility list and allow it again. Signed releases don't have this problem.
 
 ## Building from source
@@ -261,6 +260,7 @@ tail -f "$TMPDIR/stackz.log"
 | `AccessibilityElement.swift`, `AXExtension.swift`, `AXPrivate.swift` | Wrappers around the Accessibility API |
 | `SettingsView.swift` | The Settings window, grid editor and shortcut recorder |
 | `UpdateController.swift` | The Sparkle updater, its menu item and its Settings switch |
+| `LoginItem.swift` | Launch at login through SMAppService, and its Settings switch |
 | `Logger.swift` | The debug log |
 
 ## Uninstall

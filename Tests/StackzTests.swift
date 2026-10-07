@@ -410,6 +410,12 @@ class StackzTests: XCTestCase {
         XCTAssertFalse(UpdateController.shared.canCheckForUpdates)
     }
 
+    func testLoginItemReadsStateWithoutCrashing() {
+        // The test runner is not an app bundle, so this can only report "off"; it must not throw or crash
+        LoginItem.shared.refresh()
+        XCTAssertFalse(LoginItem.shared.isEnabled)
+    }
+    
     func testStackRouterSplitsAndMerges() {
         // Construct the mock tree from the drawing diagram
         let M = UserStack(id: UUID(), name: "M", startCol: 0, startRow: 0, endCol: 0, endRow: 0, parentId: nil, isMain: true)
