@@ -71,7 +71,15 @@ A copy built from source has no updater. Run the installer again, or pull and re
 
 ## The starter layout
 
-A fresh install comes with a 7 × 4 grid and thirteen zones bound to the keys under your right hand. The top row of keys targets the top of the screen, the bottom row targets the bottom, and the home row takes the full height.
+The right way to picture a Stackz layout is as a tree. A stack can be split into two substacks, each of those can be split again, and a window sent into any node pushes whatever was in its parent over to the sibling. A fresh install comes with two such trees on a 7 × 4 grid: a columns tree that splits the screen into left, center and right, then each column into a top and a bottom, and a halves tree that splits it into a top and a bottom half.
+
+<p align="center">
+  <img src="docs/tree.svg" alt="Two trees of stacks. The full screen splits into the left two columns and the remaining five; the five split into the center and right columns; every column splits into a top and a bottom. A second full-screen stack splits into the top and bottom halves." width="880" />
+</p>
+
+Every split has a main branch and a minor one. The main branch is where windows go when they arrive from another display, and it is the branch the tree keeps descending through to find the stack in use. Here the main branches run from the full screen through the five right-hand columns to the center column and its bottom half.
+
+Those same thirteen zones sit under your right hand. The top row of keys targets the top of the screen, the bottom row targets the bottom, and the home row takes the full height:
 
 <p align="center">
   <img src="docs/keymap.svg" alt="Thirteen zones mapped to Y U I O, H J K L semicolon, and N M comma period" width="880" />
@@ -119,12 +127,7 @@ Stackz divides each display's usable area (everything except the menu bar and th
 
 ### Splits and auto-routing
 
-A stack can be split into two substacks, a main one and a minor one, and each of those can be split again. The starter layout is two such trees:
-
-- Full screen splits into the left two columns (<kbd>H</kbd>) and the remaining five (<kbd>;</kbd>), which split into center (<kbd>J</kbd>) and right (<kbd>K</kbd>). Each column then splits into a top and a bottom half.
-- A second full-screen stack splits into the top half (<kbd>O</kbd>) and the bottom half (<kbd>.</kbd>).
-
-When you Send a window, Stackz looks at the other windows on that display that are sitting in stacks and applies two rules:
+A stack can be split into two substacks, a main one and a minor one, and each of those can be split again; the tree diagram above shows the starter layout's two trees. When you Send a window, Stackz looks at the other windows on that display that are sitting in stacks and applies two rules:
 
 - **Split.** If you send into a substack of the stack a window occupies, that window moves to the sibling branch, out of the way.
 - **Merge.** If you send to a stack that contains the one a window occupies, that window moves up into the same stack, directly behind the window you sent.
