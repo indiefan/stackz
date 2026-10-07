@@ -24,12 +24,12 @@ Stackz treats each part of the screen as a **stack**: a zone that holds a pile o
 
 | Action | What it does |
 |--------|--------------|
-| **Send** | Puts the focused window in a zone. |
-| **Swap** | Trades places with the window on top of another zone. |
-| **Select** | Jumps focus to a zone. |
-| **Spin** | Flips through the windows piled in a zone, with a thumbnail switcher. |
+| **Send** | Puts the focused window in a stack. |
+| **Swap** | Trades places with the window on top of another stack. |
+| **Select** | Jumps focus to a stack. |
+| **Spin** | Flips through the windows piled in a stack, with a thumbnail switcher. |
 
-Zones nest, and that is what keeps the screen tidy without any effort from you:
+Stacks nest, and that is what keeps the screen tidy without any effort from you:
 
 <p align="center">
   <img src="docs/auto-routing.svg" alt="Sending Shell to the left column moves Browser over. Sending Chat to the right column shrinks Browser to the center. Sending Browser back to the wider zone merges Chat in behind it." width="880" />
