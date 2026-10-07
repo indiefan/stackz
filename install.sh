@@ -26,7 +26,7 @@ TMP_DIR=""
 
 # The Apple developer team that signs official releases. A download signed by anyone
 # else is refused. While this is empty the installer always builds from source.
-TEAM_ID=""
+TEAM_ID="6P8F6NCJ3D"
 
 say()  { printf '==> %s\n' "$*"; }
 fail() { printf 'Error: %s\n' "$*" >&2; exit 1; }
