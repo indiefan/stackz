@@ -43,31 +43,11 @@ Stackz is a menu bar app in about 3,600 lines of Swift. Its one dependency is [S
 curl -fsSL https://raw.githubusercontent.com/indiefan/stackz/main/install.sh | bash
 ```
 
-That puts `Stackz.app` in `/Applications` (or `~/Applications` if you can't write there) and opens it. It needs macOS 13 or later and never asks for sudo.
+This installs the latest signed, notarized release into `/Applications` and opens it. macOS 13 or later; no sudo. If you'd rather not pipe a script into bash, grab `Stackz.zip` from the [releases page](https://github.com/indiefan/stackz/releases), or clone the repo and run `./install.sh`, which builds from source.
 
-The installer uses the latest signed and notarized release when there is one, and refuses any download that isn't signed with the Stackz developer certificate. When no release is available it builds from source instead, which needs Apple's Command Line Tools (`xcode-select --install`) and takes about a minute. Each release is also attached to the [releases page](https://github.com/indiefan/stackz/releases) as `Stackz.zip`, if you would rather download it yourself.
+On first launch, allow Stackz under System Settings → Privacy & Security → **Accessibility** (it can't move windows without it) and, optionally, **Screen Recording** for window previews in the Spin switcher. The Settings window opens once; afterwards it lives in the menu bar menu, next to Check for Updates…. Then focus any window and press <kbd>⇧</kbd><kbd>⌘</kbd><kbd>J</kbd>.
 
-To read the script before running it, or to build from source by choice, clone the repository and run the same installer from the checkout:
-
-```bash
-git clone https://github.com/indiefan/stackz.git
-cd stackz
-./install.sh
-```
-
-### First launch
-
-1. macOS asks for **Accessibility** access. Turn Stackz on under System Settings → Privacy & Security → Accessibility. It can't move windows without it. If shortcuts don't respond right after granting it, quit and reopen Stackz.
-2. Optionally allow **Screen Recording** in the same place. Stackz only uses it to show window thumbnails in the Spin switcher.
-3. The Settings window opens, and a grid icon appears in the menu bar. There is no Dock icon. Settings only opens by itself on this first run; later, it's in the menu bar menu.
-
-Then focus any window and press <kbd>⇧</kbd><kbd>⌘</kbd><kbd>J</kbd>.
-
-### Updates
-
-Release builds update themselves. On its second launch Stackz asks whether it may check for updates automatically. If you agree, it looks once a day and tells you when a new version is ready; the menu bar menu shows Update Available… until you have dealt with it. You can change your answer in Settings → General, and check by hand at any time with Check for Updates… in the same menu. Every update is verified against the developer's signing key before it is installed.
-
-A copy built from source has no updater. Run the installer again, or pull and rebuild.
+Updates are automatic: Stackz asks on its second launch whether it may check daily, and every update is verified against the developer's signing key before it's installed. Copies built from source don't update themselves.
 
 ## The starter layout
 
