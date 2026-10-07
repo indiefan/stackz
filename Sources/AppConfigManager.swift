@@ -24,6 +24,11 @@ class AppConfigManager {
         }
     }
     
+    /// False until the first config file has been written, which happens on the first launch.
+    var hasSavedConfig: Bool {
+        FileManager.default.fileExists(atPath: configURL.path)
+    }
+    
     func loadConfig() -> AppConfig {
         guard let data = try? Data(contentsOf: configURL),
               var config = try? JSONDecoder().decode(AppConfig.self, from: data) else {

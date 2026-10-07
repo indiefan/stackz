@@ -29,6 +29,8 @@ class AppState: ObservableObject {
     
     init() {
         SZLog("AppState initialized")
+        // Decided before the stores load, since loading writes the first config file
+        let isFirstRun = !AppConfigManager.shared.hasSavedConfig
         checkAccessibilityPermissions()
         _ = WindowManager.shared
         _ = HotkeyStore.shared
@@ -36,8 +38,11 @@ class AppState: ObservableObject {
         _ = ActiveStackOverlayManager.shared
         _ = UpdateController.shared
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.openSettings()
+        // Show Settings on the first run only. Later launches, including launch at login, stay quiet.
+        if isFirstRun {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.openSettings()
+            }
         }
     }
     

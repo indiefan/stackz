@@ -172,7 +172,7 @@ Stackz is installed in $dest.
      macOS asks the first time Stackz launches; it cannot move windows without this.
   2. Optional: allow Screen Recording in the same place so the Spin switcher
      can show window previews.
-  3. Look for the grid icon in the menu bar. Settings opens on launch.
+  3. Look for the grid icon in the menu bar. Settings opens on the first launch.
 
 Your layout and shortcuts are stored in ~/.stackz.json.
 EOF

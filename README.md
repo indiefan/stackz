@@ -59,7 +59,7 @@ cd stackz
 
 1. macOS asks for **Accessibility** access. Turn Stackz on under System Settings → Privacy & Security → Accessibility. It can't move windows without it. If shortcuts don't respond right after granting it, quit and reopen Stackz.
 2. Optionally allow **Screen Recording** in the same place. Stackz only uses it to show window thumbnails in the Spin switcher.
-3. The Settings window opens, and a grid icon appears in the menu bar. There is no Dock icon.
+3. The Settings window opens, and a grid icon appears in the menu bar. There is no Dock icon. Settings only opens by itself on this first run; later, it's in the menu bar menu.
 
 Then focus any window and press <kbd>⇧</kbd><kbd>⌘</kbd><kbd>J</kbd>.
 
@@ -165,7 +165,7 @@ Stackz outlines the stack that holds the focused window, so you can always see w
 
 ## Settings
 
-Click the grid icon in the menu bar and choose Settings. The window also opens whenever Stackz starts.
+Click the grid icon in the menu bar and choose Settings. The window also opens by itself the first time Stackz runs.
 
 - **General** holds the grid size (2 to 24 columns and rows), the shortcuts that aren't tied to a zone, the border switches, the auto-sort switches, launch at login and, in release builds, the automatic update check.
 - **Stacks** shows your stacks as a tree. Double-click one to redraw it on the grid or change its four shortcuts. **Split** divides a stack in two, **New Stack** starts a new tree, and **Reset All** deletes every stack and clears every shortcut.
