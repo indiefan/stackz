@@ -71,13 +71,22 @@ A copy built from source has no updater. Run the installer again, or pull and re
 
 ## The starter layout
 
-The right way to picture a Stackz layout is as a tree. A stack can be split into two substacks, each of those can be split again, and a window sent into any node pushes whatever was in its parent over to the sibling. A fresh install comes with two such trees on a 7 × 4 grid: a columns tree that splits the screen into left, center and right, then each column into a top and a bottom, and a halves tree that splits it into a top and a bottom half.
+The way to picture a Stackz layout is as a tree. A stack can be split into two substacks, each of those can be split again, and the whole screen is the root. The starter layout is one such tree on a 7 × 4 grid: the full screen splits into the left two columns and the remaining five, those five split into the center and right columns, and every column splits into a top and a bottom.
 
 <p align="center">
-  <img src="docs/tree.svg" alt="Two trees of stacks. The full screen splits into the left two columns and the remaining five; the five split into the center and right columns; every column splits into a top and a bottom. A second full-screen stack splits into the top and bottom halves." width="880" />
+  <img src="docs/tree.svg" alt="A tree of stacks. The full screen splits into the left two columns and the remaining five; the five split into the center and right columns; every column splits into a top and a bottom." width="880" />
 </p>
 
-Every split has a main branch and a minor one. The main branch is where windows go when they arrive from another display, and it is the branch the tree keeps descending through to find the stack in use. Here the main branches run from the full screen through the five right-hand columns to the center column and its bottom half.
+What makes the tree useful is that stacks split themselves. You never carve the screen up by hand; you send windows to the nodes you want, and the windows above them make room:
+
+- Your browser fills the screen, so it sits in the root.
+- Send a terminal to the left column (<kbd>H</kbd>). That node is below the root, so the browser can't stay where it was: it slides into the other branch, the five right-hand columns (<kbd>;</kbd>). The screen is now split in two.
+- Send a chat window to the right column (<kbd>K</kbd>). That is below the browser's new stack, so the browser slides again, into the center column (<kbd>J</kbd>). Three columns.
+- Send the browser back up to the five columns (<kbd>;</kbd>). The chat window's stack is below that node, so it merges in behind the browser, and Spin flips between them.
+
+The rule is always the same: a window sent into a node pushes whatever was in that node's ancestors down into the sibling branch, and a window sent into a node pulls whatever was in its descendants up behind it. Windows elsewhere in the tree stay put.
+
+Every split has a main branch (solid in the diagram) and a minor one (dashed). The main branch is the one the tree descends when a window arrives from another display. A second, two-node tree splits the full screen into a top half (<kbd>O</kbd>) and a bottom half (<kbd>.</kbd>) for the times a wide layout fits better.
 
 Those same thirteen zones sit under your right hand. The top row of keys targets the top of the screen, the bottom row targets the bottom, and the home row takes the full height:
 
